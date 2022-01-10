@@ -61,13 +61,16 @@ public class vacanciesSpider {
                                     System.out.println("公司網址：" + companyHref);
                                 }
                             }
-
+                            //莊富淇
+                            //讀取職缺資料
                             Elements jobTags = jobInfo.select(".job-list-item-tags");
                             for(Element tag : jobTags){
+                                //抓取招聘人數、薪資、職缺類別
                                 Elements numberOfHires = tag.select(".number-for-hire-section");
                                 Elements salary = tag.select(".job-salary");
                                 Elements jobLabels = tag.select(".labels a.label.label-default");
                                 String number = numberOfHires.text();
+                                //判斷是否有該資料並輸出
                                 if(jobLabels.hasText()){
                                     System.out.println("職缺類別: \n" );
                                 }
