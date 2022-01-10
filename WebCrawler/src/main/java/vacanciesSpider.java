@@ -62,6 +62,9 @@ public class vacanciesSpider {
             taipeiWriter.close();
             kaohsiungWriter.close();
             System.out.println("==================");
+            System.out.println("台北職缺總數：" + taipeiJobCount);
+            System.out.println("台中職缺總數：" + taichungJobCount);
+            System.out.println("高雄職缺總數：" + kaohsiungJobCount);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
