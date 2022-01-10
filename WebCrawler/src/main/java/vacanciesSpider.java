@@ -41,16 +41,21 @@ public class vacanciesSpider {
                         if (jobLocation.text().contains("台北")){
                             taipeiJobCount = taipeiJobCount + 1;
                             System.out.println("==========台北職缺==========");
+                            //陳雅蓁
+                            //讀取職缺資訊
                             Elements jobContents = jobInfo.select(".job-list-item-content");
                             for (Element jobContent : jobContents){
+                                //抓取職缺、公司的名稱與網址的路徑
                                 Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
                                 Elements companyName = jobContent.select(".page-name a");
                                 System.out.println("職缺："+ jobs.text());
+                                //抓取並輸出職缺網址
                                 for (Element job :jobs){
                                     String jobHref = job.absUrl("href");
                                     System.out.println("職缺網址:" + jobHref);
                                 }
                                 System.out.println("公司：" + companyName.text());
+                                //抓取並輸出公司網址
                                 for (Element company : companyName){
                                     String companyHref = company.absUrl("href");
                                     System.out.println("公司網址：" + companyHref);
