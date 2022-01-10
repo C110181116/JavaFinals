@@ -40,6 +40,23 @@ public class vacanciesSpider {
                         Elements jobLocation = jobInfo.select(".job-list-item-tags .info-section .location-section .middot abbr");
                         if (jobLocation.text().contains("台北")){
                             taipeiJobCount = taipeiJobCount + 1;
+                            System.out.println("==========台北職缺==========");
+                            Elements jobContents = jobInfo.select(".job-list-item-content");
+                            for (Element jobContent : jobContents){
+                                Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
+                                Elements companyName = jobContent.select(".page-name a");
+                                System.out.println("職缺："+ jobs.text());
+                                for (Element job :jobs){
+                                    String jobHref = job.absUrl("href");
+                                    System.out.println("職缺網址:" + jobHref);
+                                }
+                                System.out.println("公司：" + companyName.text());
+                                for (Element company : companyName){
+                                    String companyHref = company.absUrl("href");
+                                    System.out.println("公司網址：" + companyHref);
+                                }
+                            }
+
                             Elements jobTags = jobInfo.select(".job-list-item-tags");
                             for(Element tag : jobTags){
                                 Elements numberOfHires = tag.select(".number-for-hire-section");
@@ -69,6 +86,22 @@ public class vacanciesSpider {
                             }
                         }else if(jobLocation.text().contains("台中")){
                             taichungJobCount = taichungJobCount + 1;
+                            System.out.println("==========台中職缺==========");
+                            Elements jobContents = jobInfo.select(".job-list-item-content");
+                            for (Element jobContent : jobContents){
+                                Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
+                                Elements companyName = jobContent.select(".page-name a");
+                                System.out.println("職缺："+ jobs.text());
+                                for (Element job :jobs){
+                                    String jobHref = job.absUrl("href");
+                                    System.out.println("職缺網址:" + jobHref);
+                                }
+                                System.out.println("公司：" + companyName.text());
+                                for (Element company : companyName){
+                                    String companyHref = company.absUrl("href");
+                                    System.out.println("公司網址：" + companyHref);
+                                }
+                            }
                             Elements jobTags = jobInfo.select(".job-list-item-tags");
                             for(Element tag : jobTags){
                                 Elements numberOfHires = tag.select(".number-for-hire-section");
@@ -99,6 +132,22 @@ public class vacanciesSpider {
 
                         }else if(jobLocation.text().contains("高雄")){
                             kaohsiungJobCount = kaohsiungJobCount + 1;
+                            System.out.println("==========高雄職缺==========");
+                            Elements jobContents = jobInfo.select(".job-list-item-content");
+                            for (Element jobContent : jobContents){
+                                Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
+                                Elements companyName = jobContent.select(".page-name a");
+                                System.out.println("職缺："+ jobs.text());
+                                for (Element job :jobs){
+                                    String jobHref = job.absUrl("href");
+                                    System.out.println("職缺網址:" + jobHref);
+                                }
+                                System.out.println("公司：" + companyName.text());
+                                for (Element company : companyName){
+                                    String companyHref = company.absUrl("href");
+                                    System.out.println("公司網址：" + companyHref);
+                                }
+                            }
                             Elements jobTags = jobInfo.select(".job-list-item-tags");
                             for(Element tag : jobTags){
                                 Elements numberOfHires = tag.select(".number-for-hire-section");
