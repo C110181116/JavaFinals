@@ -40,14 +40,95 @@ public class vacanciesSpider {
                         Elements jobLocation = jobInfo.select(".job-list-item-tags .info-section .location-section .middot abbr");
                         if (jobLocation.text().contains("台北")){
                             taipeiJobCount = taipeiJobCount + 1;
-
+                            Elements jobTags = jobInfo.select(".job-list-item-tags");
+                            for(Element tag : jobTags){
+                                Elements numberOfHires = tag.select(".number-for-hire-section");
+                                Elements salary = tag.select(".job-salary");
+                                Elements jobLabels = tag.select(".labels a.label.label-default");
+                                String number = numberOfHires.text();
+                                if(jobLabels.hasText()){
+                                    System.out.println("職缺類別: \n" );
+                                }
+                                else{
+                                    System.out.println("職缺類別 : \n ");
+                                }
+                                for(Element jobLabel : jobLabels){
+                                    System.out.println("-" + jobLabel.text() + "\n");
+                                }
+                                if(!number.isEmpty()){
+                                    System.out.println("招聘人數" + numberOfHires.text() + "\n");
+                                }
+                                else {
+                                    System.out.println("招聘人數 : 沒註明\n ");
+                                }
+                                if(!salary.isEmpty()){
+                                    System.out.println("薪資 :" + salary.text() + "\n");
+                                }else{
+                                    System.out.println("薪資 : 沒註明\n");
+                                }
+                            }
                         }else if(jobLocation.text().contains("台中")){
                             taichungJobCount = taichungJobCount + 1;
+                            Elements jobTags = jobInfo.select(".job-list-item-tags");
+                            for(Element tag : jobTags){
+                                Elements numberOfHires = tag.select(".number-for-hire-section");
+                                Elements salary = tag.select(".job-salary");
+                                Elements jobLabels = tag.select(".labels a.label.label-default");
+                                String number = numberOfHires.text();
+                                if(jobLabels.hasText()){
+                                    System.out.println("職缺類別: \n" );
+                                }
+                                else{
+                                    System.out.println("職缺類別 : \n ");
+                                }
+                                for(Element jobLabel : jobLabels){
+                                    System.out.println("-" + jobLabel.text() + "\n");
+                                }
+                                if(!number.isEmpty()){
+                                    System.out.println("招聘人數" + numberOfHires.text() + "\n");
+                                }
+                                else {
+                                    System.out.println("招聘人數 : 沒註明\n ");
+                                }
+                                if(!salary.isEmpty()){
+                                    System.out.println("薪資 :" + salary.text() + "\n");
+                                }else{
+                                    System.out.println("薪資 : 沒註明\n");
+                                }
+                            }
 
                         }else if(jobLocation.text().contains("高雄")){
                             kaohsiungJobCount = kaohsiungJobCount + 1;
-
+                            Elements jobTags = jobInfo.select(".job-list-item-tags");
+                            for(Element tag : jobTags){
+                                Elements numberOfHires = tag.select(".number-for-hire-section");
+                                Elements salary = tag.select(".job-salary");
+                                Elements jobLabels = tag.select(".labels a.label.label-default");
+                                String number = numberOfHires.text();
+                                if(jobLabels.hasText()){
+                                    System.out.println("職缺類別: \n" );
+                                }
+                                else{
+                                    System.out.println("職缺類別 : \n ");
+                                }
+                                for(Element jobLabel : jobLabels){
+                                    System.out.println("-" + jobLabel.text() + "\n");
+                                }
+                                if(!number.isEmpty()){
+                                    System.out.println("招聘人數" + numberOfHires.text() + "\n");
+                                }
+                                else {
+                                    System.out.println("招聘人數 : 沒註明\n ");
+                                }
+                                if(!salary.isEmpty()){
+                                    System.out.println("薪資 :" + salary.text() + "\n");
+                                }else{
+                                    System.out.println("薪資 : 沒註明\n");
+                                }
+                            }
                         }
+
+
                     }
                     Thread.sleep(2000);
                 }else{
