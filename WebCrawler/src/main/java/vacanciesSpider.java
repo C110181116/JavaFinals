@@ -16,8 +16,10 @@ import java.util.Scanner;
 public class vacanciesSpider {
     public static void main(String[] args) {
         try {
+            //桌面路徑
             javax.swing.filechooser.FileSystemView fsv = javax.swing.filechooser.FileSystemView.getFileSystemView();
             String path = fsv.getHomeDirectory().getPath();
+            //建立新的文字檔
             File taipeiJobFile = new File(path + "\\台北職缺.txt");
             taipeiJobFile.createNewFile();
             BufferedWriter taipeiWriter = new BufferedWriter(new FileWriter(taipeiJobFile));
@@ -27,12 +29,14 @@ public class vacanciesSpider {
             File kaohsiungFile = new File(path + "\\高雄職缺.txt");
             kaohsiungFile.createNewFile();
             BufferedWriter kaohsiungWriter = new BufferedWriter(new FileWriter(kaohsiungFile));
+            //計算頁碼
             int page = 1;
+            //計算職缺總數
             int taipeiJobCount = 0;
             int taichungJobCount = 0;
             int kaohsiungJobCount = 0;
             while (true){
-                Document doc = Jsoup.connect("https://www.cakeresume.com/jobs?ref=navs_jobs&page=" + String.valueOf(page)).get();
+                Document doc = Jsoup.connect("https://www.cakeresume.com/jobs?ref=navs_jobs&page=" + page).get();
                 Elements jobInfos = doc.select(".job-item");
                 if (!jobInfos.isEmpty()){
                     System.out.printf("正在讀取----第%d頁\n" , page);
@@ -40,7 +44,8 @@ public class vacanciesSpider {
                         Elements jobLocation = jobInfo.select(".job-list-item-tags .info-section .location-section .middot abbr");
                         if (jobLocation.text().contains("台北")){
                             taipeiJobCount = taipeiJobCount + 1;
-                            System.out.println("==========台北職缺==========");
+                            //把文字寫入文字檔
+                            taipeiWriter.write("==========台北職缺==========\n");
                             //陳雅蓁
                             //讀取職缺資訊
                             Elements jobContents = jobInfo.select(".job-list-item-content");
@@ -48,17 +53,17 @@ public class vacanciesSpider {
                                 //抓取職缺、公司的名稱與網址的路徑
                                 Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
                                 Elements companyName = jobContent.select(".page-name a");
-                                System.out.println("職缺："+ jobs.text());
+                                taipeiWriter.write("職缺：" + jobs.text() + "\n");
                                 //抓取並輸出職缺網址
                                 for (Element job :jobs){
                                     String jobHref = job.absUrl("href");
-                                    System.out.println("職缺網址:" + jobHref);
+                                    taipeiWriter.write("職缺網址:" + jobHref + "\n");
                                 }
-                                System.out.println("公司：" + companyName.text());
+                                taipeiWriter.write("公司：" + companyName.text() + "\n");
                                 //抓取並輸出公司網址
                                 for (Element company : companyName){
                                     String companyHref = company.absUrl("href");
-                                    System.out.println("公司網址：" + companyHref);
+                                    taipeiWriter.write("公司網址：" + companyHref + "\n");
                                 }
                             }
                             //莊富淇
@@ -72,42 +77,42 @@ public class vacanciesSpider {
                                 String number = numberOfHires.text();
                                 //判斷是否有該資料並輸出
                                 if(jobLabels.hasText()){
-                                    System.out.println("職缺類別: \n" );
+                                    taipeiWriter.write("職缺類別: \n" );
                                 }
                                 else{
-                                    System.out.println("職缺類別 : \n ");
+                                    taipeiWriter.write("職缺類別 : \n ");
                                 }
                                 for(Element jobLabel : jobLabels){
-                                    System.out.println("-" + jobLabel.text() + "\n");
+                                    taipeiWriter.write("-" + jobLabel.text() + "\n");
                                 }
                                 if(!number.isEmpty()){
-                                    System.out.println("招聘人數" + numberOfHires.text() + "\n");
+                                    taipeiWriter.write("招聘人數" + numberOfHires.text() + "\n");
                                 }
                                 else {
-                                    System.out.println("招聘人數 : 沒註明\n ");
+                                    taipeiWriter.write("招聘人數 : 沒註明\n ");
                                 }
                                 if(!salary.isEmpty()){
-                                    System.out.println("薪資 :" + salary.text() + "\n");
+                                    taipeiWriter.write("薪資 :" + salary.text() + "\n");
                                 }else{
-                                    System.out.println("薪資 : 沒註明\n");
+                                    taipeiWriter.write("薪資 : 沒註明\n");
                                 }
                             }
                         }else if(jobLocation.text().contains("台中")){
                             taichungJobCount = taichungJobCount + 1;
-                            System.out.println("==========台中職缺==========");
+                            taichungWriter.write("==========台中職缺==========\n");
                             Elements jobContents = jobInfo.select(".job-list-item-content");
                             for (Element jobContent : jobContents){
                                 Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
                                 Elements companyName = jobContent.select(".page-name a");
-                                System.out.println("職缺："+ jobs.text());
+                                taichungWriter.write("職缺："+ jobs.text() + "\n");
                                 for (Element job :jobs){
                                     String jobHref = job.absUrl("href");
-                                    System.out.println("職缺網址:" + jobHref);
+                                    taichungWriter.write("職缺網址:" + jobHref + "\n");
                                 }
-                                System.out.println("公司：" + companyName.text());
+                                taichungWriter.write("公司：" + companyName.text() + "\n");
                                 for (Element company : companyName){
                                     String companyHref = company.absUrl("href");
-                                    System.out.println("公司網址：" + companyHref);
+                                    taichungWriter.write("公司網址：" + companyHref + "\n");
                                 }
                             }
                             Elements jobTags = jobInfo.select(".job-list-item-tags");
@@ -117,43 +122,43 @@ public class vacanciesSpider {
                                 Elements jobLabels = tag.select(".labels a.label.label-default");
                                 String number = numberOfHires.text();
                                 if(jobLabels.hasText()){
-                                    System.out.println("職缺類別: \n" );
+                                    taichungWriter.write("職缺類別: \n" );
                                 }
                                 else{
-                                    System.out.println("職缺類別 : \n ");
+                                    taichungWriter.write("職缺類別 : \n ");
                                 }
                                 for(Element jobLabel : jobLabels){
-                                    System.out.println("-" + jobLabel.text() + "\n");
+                                    taichungWriter.write("-" + jobLabel.text() + "\n");
                                 }
                                 if(!number.isEmpty()){
-                                    System.out.println("招聘人數" + numberOfHires.text() + "\n");
+                                    taichungWriter.write("招聘人數" + numberOfHires.text() + "\n");
                                 }
                                 else {
-                                    System.out.println("招聘人數 : 沒註明\n ");
+                                    taichungWriter.write("招聘人數 : 沒註明\n ");
                                 }
                                 if(!salary.isEmpty()){
-                                    System.out.println("薪資 :" + salary.text() + "\n");
+                                    taichungWriter.write("薪資 :" + salary.text() + "\n");
                                 }else{
-                                    System.out.println("薪資 : 沒註明\n");
+                                    taichungWriter.write("薪資 : 沒註明\n");
                                 }
                             }
 
                         }else if(jobLocation.text().contains("高雄")){
                             kaohsiungJobCount = kaohsiungJobCount + 1;
-                            System.out.println("==========高雄職缺==========");
+                            kaohsiungWriter.write("==========高雄職缺==========\n");
                             Elements jobContents = jobInfo.select(".job-list-item-content");
                             for (Element jobContent : jobContents){
                                 Elements jobs = jobContent.select(".job-title .job-link-wrapper .job-link");
                                 Elements companyName = jobContent.select(".page-name a");
-                                System.out.println("職缺："+ jobs.text());
+                                kaohsiungWriter.write("職缺：" + jobs.text() + "\n");
                                 for (Element job :jobs){
                                     String jobHref = job.absUrl("href");
-                                    System.out.println("職缺網址:" + jobHref);
+                                    kaohsiungWriter.write("職缺網址:" + jobHref + "\n");
                                 }
-                                System.out.println("公司：" + companyName.text());
+                                kaohsiungWriter.write("公司：" + companyName.text() + "\n");
                                 for (Element company : companyName){
                                     String companyHref = company.absUrl("href");
-                                    System.out.println("公司網址：" + companyHref);
+                                    kaohsiungWriter.write("公司網址：" + companyHref + "\n");
                                 }
                             }
                             Elements jobTags = jobInfo.select(".job-list-item-tags");
@@ -163,29 +168,27 @@ public class vacanciesSpider {
                                 Elements jobLabels = tag.select(".labels a.label.label-default");
                                 String number = numberOfHires.text();
                                 if(jobLabels.hasText()){
-                                    System.out.println("職缺類別: \n" );
+                                    kaohsiungWriter.write("職缺類別: \n" );
                                 }
                                 else{
-                                    System.out.println("職缺類別 : \n ");
+                                    kaohsiungWriter.write("職缺類別 : \n ");
                                 }
                                 for(Element jobLabel : jobLabels){
-                                    System.out.println("-" + jobLabel.text() + "\n");
+                                    kaohsiungWriter.write("-" + jobLabel.text() + "\n");
                                 }
                                 if(!number.isEmpty()){
-                                    System.out.println("招聘人數" + numberOfHires.text() + "\n");
+                                    kaohsiungWriter.write("招聘人數" + numberOfHires.text() + "\n");
                                 }
                                 else {
-                                    System.out.println("招聘人數 : 沒註明\n ");
+                                    kaohsiungWriter.write("招聘人數 : 沒註明\n ");
                                 }
                                 if(!salary.isEmpty()){
-                                    System.out.println("薪資 :" + salary.text() + "\n");
+                                    kaohsiungWriter.write("薪資 :" + salary.text() + "\n");
                                 }else{
-                                    System.out.println("薪資 : 沒註明\n");
+                                    kaohsiungWriter.write("薪資 : 沒註明\n");
                                 }
                             }
                         }
-
-
                     }
                     Thread.sleep(2000);
                 }else{
