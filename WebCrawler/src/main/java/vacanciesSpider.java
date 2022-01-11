@@ -78,15 +78,15 @@ public class vacanciesSpider {
                                 //判斷是否有該資料並輸出
                                 if(jobLabels.hasText()){
                                     taipeiWriter.write("職缺類別：\n" );
-                                }
-                                for(Element jobLabel : jobLabels){
-                                    taipeiWriter.write("-" + jobLabel.text() + "\n");
+                                    for(Element jobLabel : jobLabels){
+                                        taipeiWriter.write("-" + jobLabel.text() + "\n");
+                                    }
                                 }
                                 if(!number.isEmpty()){
                                     taipeiWriter.write("招聘人數：" + numberOfHires.text() + "\n");
                                 }
                                 else {
-                                    taipeiWriter.write("招聘人數 : 沒註明\n ");
+                                    taipeiWriter.write("招聘人數 : 沒註明\n");
                                 }
                                 if(!salary.isEmpty()){
                                     taipeiWriter.write("薪資 :" + salary.text() + "\n");
@@ -120,9 +120,9 @@ public class vacanciesSpider {
                                 String number = numberOfHires.text();
                                 if(jobLabels.hasText()){
                                     taichungWriter.write("職缺類別: \n" );
-                                }
-                                for(Element jobLabel : jobLabels){
-                                    taichungWriter.write("-" + jobLabel.text() + "\n");
+                                    for(Element jobLabel : jobLabels){
+                                        taichungWriter.write("-" + jobLabel.text() + "\n");
+                                    }
                                 }
                                 if(!number.isEmpty()){
                                     taichungWriter.write("招聘人數：" + numberOfHires.text() + "\n");
@@ -163,9 +163,9 @@ public class vacanciesSpider {
                                 String number = numberOfHires.text();
                                 if(jobLabels.hasText()){
                                     kaohsiungWriter.write("職缺類別: \n" );
-                                }
-                                for(Element jobLabel : jobLabels){
-                                    kaohsiungWriter.write("-" + jobLabel.text() + "\n");
+                                    for(Element jobLabel : jobLabels){
+                                        kaohsiungWriter.write("-" + jobLabel.text() + "\n");
+                                    }
                                 }
                                 if(!number.isEmpty()){
                                     kaohsiungWriter.write("招聘人數：" + numberOfHires.text() + "\n");
