@@ -79,9 +79,6 @@ public class vacanciesSpider {
                                 if(jobLabels.hasText()){
                                     taipeiWriter.write("職缺類別：\n" );
                                 }
-                                else{
-                                    taipeiWriter.write("職缺類別：\n ");
-                                }
                                 for(Element jobLabel : jobLabels){
                                     taipeiWriter.write("-" + jobLabel.text() + "\n");
                                 }
@@ -123,9 +120,6 @@ public class vacanciesSpider {
                                 String number = numberOfHires.text();
                                 if(jobLabels.hasText()){
                                     taichungWriter.write("職缺類別: \n" );
-                                }
-                                else{
-                                    taichungWriter.write("職缺類別 : \n ");
                                 }
                                 for(Element jobLabel : jobLabels){
                                     taichungWriter.write("-" + jobLabel.text() + "\n");
@@ -169,9 +163,6 @@ public class vacanciesSpider {
                                 String number = numberOfHires.text();
                                 if(jobLabels.hasText()){
                                     kaohsiungWriter.write("職缺類別: \n" );
-                                }
-                                else{
-                                    kaohsiungWriter.write("職缺類別 : \n ");
                                 }
                                 for(Element jobLabel : jobLabels){
                                     kaohsiungWriter.write("-" + jobLabel.text() + "\n");
