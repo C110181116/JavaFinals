@@ -77,16 +77,16 @@ public class vacanciesSpider {
                                 String number = numberOfHires.text();
                                 //判斷是否有該資料並輸出
                                 if(jobLabels.hasText()){
-                                    taipeiWriter.write("職缺類別: \n" );
+                                    taipeiWriter.write("職缺類別：\n" );
                                 }
                                 else{
-                                    taipeiWriter.write("職缺類別 : \n ");
+                                    taipeiWriter.write("職缺類別：\n ");
                                 }
                                 for(Element jobLabel : jobLabels){
                                     taipeiWriter.write("-" + jobLabel.text() + "\n");
                                 }
                                 if(!number.isEmpty()){
-                                    taipeiWriter.write("招聘人數" + numberOfHires.text() + "\n");
+                                    taipeiWriter.write("招聘人數：" + numberOfHires.text() + "\n");
                                 }
                                 else {
                                     taipeiWriter.write("招聘人數 : 沒註明\n ");
@@ -131,7 +131,7 @@ public class vacanciesSpider {
                                     taichungWriter.write("-" + jobLabel.text() + "\n");
                                 }
                                 if(!number.isEmpty()){
-                                    taichungWriter.write("招聘人數" + numberOfHires.text() + "\n");
+                                    taichungWriter.write("招聘人數：" + numberOfHires.text() + "\n");
                                 }
                                 else {
                                     taichungWriter.write("招聘人數 : 沒註明\n ");
@@ -177,7 +177,7 @@ public class vacanciesSpider {
                                     kaohsiungWriter.write("-" + jobLabel.text() + "\n");
                                 }
                                 if(!number.isEmpty()){
-                                    kaohsiungWriter.write("招聘人數" + numberOfHires.text() + "\n");
+                                    kaohsiungWriter.write("招聘人數：" + numberOfHires.text() + "\n");
                                 }
                                 else {
                                     kaohsiungWriter.write("招聘人數 : 沒註明\n ");
